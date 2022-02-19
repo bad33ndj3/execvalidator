@@ -1,0 +1,21 @@
+tasks:
+  lint:
+    command:
+      - golangci-lint run ./...
+      - go vet $(go list ./... | grep -v /vendor/)
+
+  test:
+    allow_failure: true
+    command: go test ./...
+
+  build:
+    command:
+      - go build -o bin/app .
+    before: rm -rf bin/*
+
+pipelines:
+  release:
+    - task: lint
+    - task: test
+    - task: build
+      depends_on: [lint, test]
