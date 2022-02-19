@@ -14,6 +14,7 @@ func main() {
 	// add subcommands
 	execValidator := execval.NewValidator()
 	root.AddCommand(cmd.NewExistsCmd(execValidator))
+	root.AddCommand(cmd.NewMinCmd())
 
 	// execute the command line tool
 	err := root.Execute()
