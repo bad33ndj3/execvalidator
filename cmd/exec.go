@@ -23,7 +23,5 @@ func NewExecCommand(val execval.Validator) *cobra.Command {
 		},
 	}
 
-	exec.PersistentFlags().StringSliceP("executables", "e", []string{}, "tags to be added to the build")
-
 	return exec
 }
