@@ -8,12 +8,13 @@ import (
 )
 
 func NewExecCommand(val execval.Validator) *cobra.Command {
+	var executables []string
 	exec := &cobra.Command{
 		Use:   "exec",
 		Short: "Validate an executable exists",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			for i := range args {
-				err := val.Validate(args[i])
+			for i := range executables {
+				err := val.Validate(executables[i])
 				if err != nil {
 					return errors.Wrap(err, "failed to validate executable")
 				}
@@ -22,6 +23,8 @@ func NewExecCommand(val execval.Validator) *cobra.Command {
 			return nil
 		},
 	}
+
+	exec.PersistentFlags().StringSliceVarP(&executables, "executables", "e", []string{}, "tags to be added to the build")
 
 	return exec
 }

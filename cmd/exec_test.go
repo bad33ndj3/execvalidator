@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/bad33ndj3/execvalidator/pkg/execval/mocks"
@@ -14,12 +15,14 @@ func Test_ExecuteCommand(t *testing.T) {
 	cmd := NewExecCommand(execValidator)
 
 	// set args for testing
-	cmd.SetArgs([]string{"ls"})
+	cmd.SetArgs([]string{
+		fmt.Sprintf("--executables=%s", "ls,vim"),
+	})
 
 	// check if Execute on cmd returns no error
 	if err := cmd.Execute(); err != nil {
 		t.Errorf("cmd.Execute() error = %v", err)
 	}
 
-	execValidator.AssertNumberOfCalls(t, "Validate", 1)
+	execValidator.AssertNumberOfCalls(t, "Validate", 2)
 }
