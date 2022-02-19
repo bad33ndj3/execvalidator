@@ -10,14 +10,14 @@ $ go install github.com/bad33ndj3/execvalidator@latest
 
 ### Usage
 
-usage: execvalidator exec [executables to validate]
+usage: execvalidator exists [executables to validate]
 
 ```shell
 # validates that exec is in the PATH
-$ execvalidator exec ls
+$ execvalidator exists ls
 >
 
-# returns an error if exec is not in the PATH
-$ execvalidator exec non-existent-executable
+# returns an error if executable is not in the PATH
+$ execvalidator exists non-existent-executable
 > Error: failed to validate executable: exec: "non-existent-executable": executable file not found in $PATH
 ```  
