@@ -14,7 +14,8 @@ usage: execvalidator exists [executables to validate]
 
 ```shell
 # validates that exec is in the PATH
-$ execvalidator exists ls
+$ execvalidator exists ls vim cat
+$ execvalidator exists --executables=ls,vim,cat
 >
 
 # returns an error if executable is not in the PATH
